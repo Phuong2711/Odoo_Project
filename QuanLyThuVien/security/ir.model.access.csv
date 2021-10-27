@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+admin_access_sach,admin_access_sach,model_model_sach,base.group_erp_manager,1,1,1,1
+admin_access_theloai,admin_access_theloai,model_model_theloai,base.group_erp_manager,1,1,1,1
+admin_access_phieumuon,admin_access_phieumuon,model_model_phieumuon,base.group_erp_manager,1,1,1,1

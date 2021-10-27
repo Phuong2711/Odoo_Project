@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="pm_tree_view" model="ir.ui.view">
+            <field name="name">PM Tree View</field>
+            <field name="model">model.phieumuon</field>
+            <field name="arch" type="xml">
+                <tree string="" class="PM_tree_class">
+                    <field name="ma_phieu_muon"/>
+                    <field name="ten_kh"/>
+                    <field name="sdt"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="PM_form_view" model="ir.ui.view">
+            <field name="name">PM Form View</field>
+            <field name="model">model.phieumuon</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ma_phieu_muon" readonly="True"/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group name="thong_tin_pm">
+                                <field name="ten_kh"/>
+                                <field name="sdt"/>
+                            </group>
+                            <group>
+                                <field name="dia_chi"/>
+                            </group>
+                            <group>
+                                <field name="ngay_muon" readonly="True"/>
+                                <field name="ngay_tra"/>
+                                <field name="so_ngay_muon" readonly="True"/>
+                            </group>
+                            <group>
+                                <h1 style="color:Red;">
+                                    Tổng tiền: <field name="tong_tien" readonly="True"/> vnd
+                                </h1>
+                            </group>
+                                <field name="danhsach_sach"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="pm_action" model="ir.actions.act_window">
+            <field name="name">Quản lý phiếu mượn</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">model.phieumuon</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem id="pm_menu" name="Quản lý phiếu mượn" parent="root_menu"
+                  action="pm_action" sequence="4"/>
+
+    </data>
+</odoo>
