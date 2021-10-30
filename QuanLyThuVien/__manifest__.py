@@ -18,6 +18,7 @@
         'views/theloai_view.xml',
         'views/kho_sach_view.xml',
         'views/phieu_muon_view.xml',
+        'views/tac_gia_view.xml',
         'views/template.xml',
 
 

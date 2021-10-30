@@ -18,6 +18,7 @@ class PhieuMuon(models.Model):
     ngay_tra = fields.Date(string='Ngày trả sách:')
     so_ngay_muon = fields.Integer(string='Số ngày mượn', compute='tinh_ngay_muon')
     tong_tien = fields.Integer(string='Tổng tiền', compute='tinh_tong_tien')
+    trang_thai = fields.Selection(selection=[('0', 'Chờ xét duyệt'), ('1', 'Đang mượn'), ('2', 'Đã quá hạn')], default='0')
 
     @api.model
     def create(self, vals):
@@ -28,10 +29,17 @@ class PhieuMuon(models.Model):
 
     @api.depends('ngay_muon', 'ngay_tra')
     def tinh_ngay_muon(self):
-        self.so_ngay_muon = abs((self.ngay_tra-self.ngay_muon).days)
+        try:
+            self.so_ngay_muon = abs((self.ngay_tra-self.ngay_muon).days)
+        except:
+            self.so_ngay_muon = 0
 
     @api.depends('ngay_muon', 'ngay_tra', 'danhsach_sach')
     def tinh_tong_tien(self):
-        self.tong_tien = abs((self.ngay_tra-self.ngay_muon).days) * len(self.danhsach_sach) * 5000
+        try:
+            self.tong_tien = abs((self.ngay_tra-self.ngay_muon).days) * len(self.danhsach_sach) * 5000
+        except:
+            self.tong_tien = 0
+
 
 

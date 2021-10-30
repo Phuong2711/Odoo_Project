@@ -1,6 +1,4 @@
- th, td {
-    text-align:center;
- }
+
  .sach_tree_class th:nth-child(1) {
     width: 5%;
  }
@@ -19,12 +17,21 @@
     width: 30%;
  }
 
- .sach_tree_class .o_column_sortable, .o_many2many_tags_cell{
+ .sach_tree_class th{
     height:40px;
     line-height:40px;
     font-size: 25px;
     font-weight: bold;
     color: blue;
+ }
+ .sach_tree_class th,td{
+    text-align:center;
+ }
+ .PM_tree_class th,td{
+ text-align:center;
+ }
+ .tacgia_tree_class th, td{
+ text-align:center;
  }
  .kho_kanban_class img{
     margin:auto;

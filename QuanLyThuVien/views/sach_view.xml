@@ -9,8 +9,8 @@
                 <tree string="" class="sach_tree_class">
                     <field name="ten_sach"/>
                     <field name="tac_gia"/>
+                    <field name="the_loai"/>
                     <field name="so_trang"/>
-                    <field name="mo_ta"/>
                 </tree>
             </field>
         </record>
@@ -26,16 +26,13 @@
                         <group>
                             <group name="thong_tin_sach">
                                 <field name="ten_sach"/>
-                                <field name="tac_gia"/>
+                                <field name="tac_gia" widget="many2many"/>
                                 <field name="so_trang"/>
                                 <field name="the_loai" widget="many2many_tags"/>
                                 <field name="mo_ta"/>
                             </group>
                             <group>
                                 <field name="anh" widget="image"/>
-                            </group>
-                            <group name="extra_info">
-
                             </group>
                         </group>
                     </sheet>
