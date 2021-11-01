@@ -55,17 +55,28 @@
         </record>
 
 
-        <record id="pm_action" model="ir.actions.act_window">
+        <record id="qlpm_action" model="ir.actions.act_window">
             <field name="name">Quản lý phiếu mượn</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">model.phieumuon</field>
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record id="taopm_action" model="ir.actions.act_window">
+            <field name="name">Tạo phiếu mượn</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">model.phieumuon</field>
+            <field name="view_mode">form</field>
+        </record>
 
 
-        <menuitem id="pm_menu" name="Quản lý phiếu mượn" parent="root_menu"
-                  action="pm_action" sequence="4"/>
+
+        <menuitem id="qlpm_menu" name="Quản lý phiếu mượn" parent="root_menu"
+                  action="qlpm_action" sequence="4" groups="QLTV_QuanLyChoMuon_Group"/>
+        <menuitem id="taopm_menu" name="Tạo phiếu mượn" parent="root_menu"
+                  action="taopm_action" sequence="4" groups="QLTV_KhachHang_Group"/>
+        <menuitem id="xempm_menu" name="Phiếu mượn của tôi" parent="root_menu"
+                  action="xempm_action" sequence="5" groups="QLTV_KhachHang_Group"/>
 
     </data>
 </odoo>

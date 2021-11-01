@@ -48,8 +48,8 @@
 
 
 
-        <menuitem id="tacgia_menu" name="Quản lý tác giả" parent="root_menu"
-                  action="tacgia_action" sequence="5"/>
+        <menuitem id="tacgia_menu" name="Quản lý tác giả" parent="qlc_menu"
+                  action="tacgia_action" sequence="1"/>
 
     </data>
 </odoo>

@@ -8,13 +8,13 @@
     font-weight: bold;
  }
  .sach_tree_class th:nth-child(3) {
-    width: 20%;
+    width: 27%;
  }
  .sach_tree_class th:nth-child(4) {
-    width: 10%;
+    width: 27%;
  }
  .sach_tree_class th:nth-child(5) {
-    width: 30%;
+    width: 5%;
  }
 
  .sach_tree_class th{

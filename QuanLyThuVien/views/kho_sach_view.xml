@@ -59,7 +59,7 @@
             <field name="view_mode">kanban,form</field>
         </record>
         <menuitem id="kho_sach_menu" name="Kho sách" parent="root_menu"
-                  action="kho_sach_action" sequence="3"/>
+                  action="kho_sach_action" sequence="3" groups="QLTV_KhachHang_Group"/>
 
     </data>
 </odoo>

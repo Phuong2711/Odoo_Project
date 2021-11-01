@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <tree string="" class="sach_tree_class">
                     <field name="ten_sach"/>
-                    <field name="tac_gia"/>
-                    <field name="the_loai"/>
+                    <field name="tac_gia" widget="many2many_tags"/>
+                    <field name="the_loai" widget="many2many_tags"/>
                     <field name="so_trang"/>
                 </tree>
             </field>
@@ -51,7 +51,8 @@
 
 
         <menuitem id="root_menu" name="Quản lý thư viện" sequence="0"/>
-        <menuitem id="sach_menu" name="Quản lý sách" parent="root_menu"
+        <menuitem id="qlc_menu" name="Quản lý chung" parent="root_menu" sequence="0" groups="QLTV_QuanLyKho_Group"/>
+        <menuitem id="sach_menu" name="Quản lý sách" parent="qlc_menu"
                   action="sach_action" sequence="0"/>
 
     </data>
