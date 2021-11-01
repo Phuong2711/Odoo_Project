@@ -68,6 +68,12 @@
             <field name="res_model">model.phieumuon</field>
             <field name="view_mode">form</field>
         </record>
+        <record id="xempm_action" model="ir.actions.act_window">
+            <field name="name">Xem phiếu mượn</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">model.phieumuon</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
 
 

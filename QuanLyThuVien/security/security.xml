@@ -16,4 +16,10 @@
         <field name="name">Khách hàng</field>
         <field name="category_id" ref="module_QLTV"/>
     </record>
+
+    <record model="ir.rule" id="only_read_own">
+    <field name="name">Khách hàng: chỉ có thể xem bản ghi do họ tạo, qlcm thì có thể xem tất cả</field>
+    <field name="model_id" ref="model_model_phieumuon"/>
+    <field name="domain_force">['|', '|',('create_uid','=',False),('create_uid','=',user.id), ('check_user','=',True)]</field>
+</record>
 </odoo>

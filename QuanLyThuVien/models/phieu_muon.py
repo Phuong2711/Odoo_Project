@@ -19,6 +19,13 @@ class PhieuMuon(models.Model):
     so_ngay_muon = fields.Integer(string='Số ngày mượn', compute='tinh_ngay_muon')
     tong_tien = fields.Integer(string='Tổng tiền', compute='tinh_tong_tien')
     trang_thai = fields.Selection(selection=[('0', 'Chờ xét duyệt'), ('1', 'Đang mượn'), ('2', 'Đã quá hạn')], default='0')
+    check_user = fields.Boolean(string='user', compute='_compute_user_check', default=False, store=True)
+
+    def _compute_user_check(self):
+        if self.env.user.has_group('QuanLyThuVien.QLTV_QuanLyChoMuon_Group'):
+            self.check_user = True
+        else:
+            self.check_user = False
 
     @api.model
     def create(self, vals):
