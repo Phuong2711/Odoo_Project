@@ -15,6 +15,7 @@
         'security/ir.model.access.csv',
         'security/security.xml',
         'data/sequence.xml',
+        'data/auto_change_state.xml',
         'views/sach_view.xml',
         'views/theloai_view.xml',
         'views/kho_sach_view.xml',

@@ -5,7 +5,8 @@ class Sach(models.Model):
     _name = 'model.tacgia'
     _rec_name = 'ho_ten'
 
-    anh = fields.Binary(string='Ảnh')
+    anh_dai_dien = fields.Binary(string='Ảnh đại diện')
+    anh_ca_nhan = fields.Binary(string='Ảnh')
     ho_ten = fields.Char(string='Họ tên:')
     ngay_sinh = fields.Char(string='Ngày sinh')
     tac_pham = fields.Many2many(comodel_name='model.sach')

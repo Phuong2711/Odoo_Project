@@ -17,20 +17,19 @@
             <field name="arch" type="xml">
                 <form string="">
                     <sheet>
-                        <field name="anh"  widget="image" class="oe_right oe_avatar"/>
+                        <field name="anh_dai_dien"  widget="image" class="oe_right oe_avatar"/>
 
                         <group>
                             <group name="thong_tin_tacgia">
                                 <field name="ho_ten"/>
                                 <field name="ngay_sinh"/>
+                                <field name="mo_ta"/>
 
                             </group>
                             <group>
+                                <field name="anh_ca_nhan" widget="image"/>
 
                             </group>
-                            <group>
-                            <field name="mo_ta"/>
-                                </group>
                         </group>
                     </sheet>
                 </form>

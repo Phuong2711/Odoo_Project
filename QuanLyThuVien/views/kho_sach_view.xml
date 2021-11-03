@@ -34,6 +34,7 @@
             <field name="model">model.sach</field>
             <field name="arch" type="xml">
                 <kanban string="sach" class="kho_kanban_class">
+                    
                     <field name="ten_sach"/>
                     <templates>
                         <t t-name="kanban-box">

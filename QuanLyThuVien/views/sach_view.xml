@@ -39,13 +39,36 @@
                 </form>
             </field>
         </record>
+        <record id="sach_kanban_view" model="ir.ui.view">
+            <field name="name">sach.kanban</field>
+            <field name="model">model.sach</field>
+            <field name="arch" type="xml">
+                <kanban string="sach" class="kho_kanban_class">
+
+                    <field name="ten_sach"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_employee_master_kanban">
+                                <div class="oe_kanban_details">
+
+                                    <field id="anh_dai_dien" name="anh_sach" widget="image"/>
+                                    <h1 style="text-align:center;font-weight: bold; font-size: 18px;"><field name="ten_sach"/></h1>
+                                    <p style="text-align:center;"><span><field name="tac_gia"/></span></p>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
 
         <record id="sach_action" model="ir.actions.act_window">
             <field name="name">Quản lý thư viện</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">model.sach</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
         </record>
 
 
