@@ -10,7 +10,8 @@
     """,
     'category': 'Quản lý',
     'website': '',
-    'depends': [],
+    'depends': ['mail',
+                ],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',

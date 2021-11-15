@@ -33,11 +33,12 @@ class PhieuMuon(models.Model):
         result = super(PhieuMuon, self).create(vals)
         return result
 
-    @api.model
-    def auto_change_state(self):
-        for rec in self:
-            if rec.ngay_tra > fields.Date.today():
-                rec.write({'trang_thai': '2'})
+    def check_trang_thai(self):
+        today = fields.Date.today()
+        all_pm = self.env['model.phieumuon'].search([])
+        for rec in all_pm:
+            if rec.trang_thai == '1' and rec.ngay_tra < today:
+                rec.trang_thai = '2'
 
     @api.depends('ngay_muon', 'ngay_tra')
     def tinh_ngay_muon(self):
@@ -66,14 +67,6 @@ class PhieuMuon(models.Model):
                 self.tien_phat = 0
             else:
                 self.tien_phat = tien_phat
-
-    @api.depends('ngay_tra')
-    def update_trang_thai(self):
-        today_date = datetime.date.today()
-        for rec in self:
-            ngay_tra = fields.Date.to_date(rec.ngay_tra)
-            if ngay_tra > today_date:
-                rec.trang_thai = '2'
 
     @api.constrains('sdt')
     def validate_sdt(self):
