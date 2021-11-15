@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 from odoo import _
 from odoo.exceptions import ValidationError
-from datetime import datetime
+import datetime
 import re
 
 
@@ -15,9 +15,8 @@ class PhieuMuon(models.Model):
     sdt = fields.Char(string='Số điện thoại:')
     dia_chi = fields.Text(string='Địa chỉ:')
     danhsach_sach = fields.Many2many(comodel_name='model.sach')
-    ngay_muon = fields.Date(string='Ngày mượn sách:', default=datetime.today(), store=True)
+    ngay_muon = fields.Date(string='Ngày mượn sách:', default=datetime.datetime.today(), store=True)
     ngay_tra = fields.Date(string='Ngày trả sách:')
-    current_date = fields.Date(string='Ngày hôm nay', default=datetime.today())
     so_ngay_muon = fields.Integer(string='Số ngày mượn', compute='tinh_ngay_muon')
     tong_tien = fields.Integer(compute='tinh_tong_tien')
     tien_phat = fields.Integer(compute='tinh_tien_phat')
@@ -27,10 +26,18 @@ class PhieuMuon(models.Model):
 
     @api.model
     def create(self, vals):
+        vals['ten_kh'] = vals['ten_kh'].title()
+        vals['dia_chi'] = vals['dia_chi'].title()
         if vals.get('ma_phieu_muon', 'Tạo phiếu mượn') == 'Tạo phiếu mượn':
             vals['ma_phieu_muon'] = self.env['ir.sequence'].next_by_code('model.phieumuon.sequence') or 'Tạo phiếu mượn'
         result = super(PhieuMuon, self).create(vals)
         return result
+
+    @api.model
+    def auto_change_state(self):
+        for rec in self:
+            if rec.ngay_tra > fields.Date.today():
+                rec.write({'trang_thai': '2'})
 
     @api.depends('ngay_muon', 'ngay_tra')
     def tinh_ngay_muon(self):
@@ -48,20 +55,25 @@ class PhieuMuon(models.Model):
 
     @api.depends('ngay_tra', 'danhsach_sach')
     def tinh_tien_phat(self):
-        try:
-            if self.current_date > self.ngay_tra:
-                self.tien_phat = abs((self.ngay_tra - self.current_date).days) * len(self.danhsach_sach) * 10000
-            else:
+        today_date = datetime.date.today()
+        for rec in self:
+            try:
+                ngay_tra = fields.Date.to_date(rec.ngay_tra)
+                tien_phat = (today_date-ngay_tra).days * len(rec.danhsach_sach) * 10000
+            except:
+                tien_phat = 0
+            if tien_phat <= 0:
                 self.tien_phat = 0
-        except:
-            self.tien_phat = 0
+            else:
+                self.tien_phat = tien_phat
 
     @api.depends('ngay_tra')
-    def auto_change_state(self):
+    def update_trang_thai(self):
+        today_date = datetime.date.today()
         for rec in self:
-            if datetime.today() > rec.ngay_tra:
-                result = self.write({'trang_thai': '2'})
-        return result
+            ngay_tra = fields.Date.to_date(rec.ngay_tra)
+            if ngay_tra > today_date:
+                rec.trang_thai = '2'
 
     @api.constrains('sdt')
     def validate_sdt(self):

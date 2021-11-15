@@ -44,7 +44,7 @@
                             </group>
                             <group>
                                 <field name="ngay_muon" readonly="True"/>
-                                <field name="ngay_tra" options="{'datepicker':{'minDate': 'now'}}"/>
+                                <field name="ngay_tra"/>
                                 <field name="so_ngay_muon" readonly="True"/>
                             </group>
                             <group>
