@@ -23,6 +23,7 @@
         'views/tac_gia_view.xml',
         'views/template.xml',
         'data/auto_change_state.xml',
+        'reports/report.xml',
 
 
     ],

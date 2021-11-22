@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="hienthi_tacpham_theotacgia" model="ir.actions.act_window">
+            <field name="name">Danh sách tác phẩm</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">model.sach</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('tac_gia', '=', active_id)]</field>
+        </record>
         <record id="tacgia_tree_view" model="ir.ui.view">
             <field name="name">Tác giả tree view</field>
             <field name="model">model.tacgia</field>
@@ -17,6 +24,11 @@
             <field name="arch" type="xml">
                 <form string="">
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button">
+                                <field string="Sách : " name="tacpham_count" widget="statinfo"/>
+                            </button>
+                        </div>
                         <field name="anh_dai_dien"  widget="image" class="oe_right oe_avatar"/>
 
                         <group>

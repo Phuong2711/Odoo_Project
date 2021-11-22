@@ -21,9 +21,9 @@
                             <group name="thong_tin_the_loai">
                                 <field name="ten_theloai"/>
                             </group>
-                            <group name="cac_sach">
+
                                 <field name="ten_sach"/>
-                            </group>
+
                         </group>
                     </sheet>
                 </form>

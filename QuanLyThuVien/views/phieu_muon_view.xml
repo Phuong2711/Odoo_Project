@@ -20,9 +20,11 @@
                 <form string="" class="pm_form_class">
                     <header>
                         <button name="chap_nhan" string="Chấp nhận" type="object" class="btn-primary"
-                        groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group"/>
+                        groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group" attrs="{'invisible': [('trang_thai', '!=', '0')]}"/>
                         <button name="tu_choi" string="Từ chối" type="object" class="btn-primary"
-                        groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group"/>
+                        groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group" attrs="{'invisible': [('trang_thai', '!=', '0')]}"/>
+                        <button name="da_tra" string="Đã trả" type="object" class="btn-primary"
+                        groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group" attrs="{'invisible': [('trang_thai', '!=', '1'),('trang_thai', '!=', '2')]}"/>
                     </header>
                     <sheet>
                         <header>
@@ -89,7 +91,7 @@
             <field name="view_mode">form</field>
         </record>
         <record id="xempm_action" model="ir.actions.act_window">
-            <field name="name">Xem phiếu mượn</field>
+            <field name="name">Xem phiếu tất cả phiếu mượn</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">model.phieumuon</field>
             <field name="view_mode">tree,form</field>
@@ -115,6 +117,13 @@
             <field name="view_mode">tree,form</field>
             <field name="domain">[('trang_thai', '=',  '2')]</field>
         </record>
+        <record id="xempm_hoanthanh_action" model="ir.actions.act_window">
+            <field name="name">Xem phiếu mượn đã hoàn thành</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">model.phieumuon</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('trang_thai', '=',  '4')]</field>
+        </record>
 
 
 
@@ -128,6 +137,8 @@
                   action="xempm_dangmuon_action" sequence="2" groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group"/>
         <menuitem id="pm_quahan_menu" name="Phiếu mượn đã quá hạn" parent="qlpm_menu"
                   action="xempm_quahan_action" sequence="3" groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group"/>
+        <menuitem id="pm_hoanthanh_menu" name="Phiếu mượn đã hoàn thành" parent="qlpm_menu"
+                  action="xempm_hoanthanh_action" sequence="4" groups="QuanLyThuVien.QLTV_QuanLyChoMuon_Group"/>
         <menuitem id="taopm_menu" name="Tạo phiếu mượn" parent="root_menu"
                   action="taopm_action" sequence="4" groups="QuanLyThuVien.QLTV_KhachHang_Group"/>
         <menuitem id="xempm_menu" name="Phiếu mượn của tôi" parent="root_menu"

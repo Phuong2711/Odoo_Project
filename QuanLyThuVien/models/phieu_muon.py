@@ -11,9 +11,9 @@ class PhieuMuon(models.Model):
 
     ma_phieu_muon = fields.Char(string='Mã phiếu mượn', copy=False,
                                 default= lambda self: _('Tạo phiếu mượn'))
-    ten_kh = fields.Char(string='Tên khách hàng:')
+    ten_kh = fields.Char(string='Tên khách hàng:', require=True)
     sdt = fields.Char(string='Số điện thoại:')
-    dia_chi = fields.Text(string='Địa chỉ:')
+    dia_chi = fields.Text(string='Địa chỉ:', require=True)
     danhsach_sach = fields.Many2many(comodel_name='model.sach')
     ngay_muon = fields.Date(string='Ngày mượn sách:', default=datetime.datetime.today(), store=True)
     ngay_tra = fields.Date(string='Ngày trả sách:')
@@ -21,7 +21,7 @@ class PhieuMuon(models.Model):
     tong_tien = fields.Integer(compute='tinh_tong_tien')
     tien_phat = fields.Integer(compute='tinh_tien_phat')
     trang_thai = fields.Selection(selection=[('0', 'Chờ xét duyệt'), ('1', 'Đang mượn'),
-                                             ('2', 'Đã quá hạn'),('3', 'Đã từ chối')],
+                                             ('2', 'Đã quá hạn'),('3', 'Đã từ chối'),('4', 'Đã trả sách')],
                                   default='0')
 
     @api.model
@@ -32,6 +32,15 @@ class PhieuMuon(models.Model):
             vals['ma_phieu_muon'] = self.env['ir.sequence'].next_by_code('model.phieumuon.sequence') or 'Tạo phiếu mượn'
         result = super(PhieuMuon, self).create(vals)
         return result
+
+    def write(self, vals):
+        vals['ten_kh'] = vals['ten_kh'].title()
+        vals['dia_chi'] = vals['dia_chi'].title()
+        result = super(PhieuMuon, self).write(vals)
+        return result
+
+    def unlink(self):
+        return super(PhieuMuon, self).unlink()
 
     def check_trang_thai(self):
         today = fields.Date.today()
@@ -73,11 +82,24 @@ class PhieuMuon(models.Model):
         if not re.match(r"^0+[0-9]{9}$", self.sdt):
             raise ValidationError('Vui lòng nhập sdt hợp lệ!!!')
 
+    @api.constrains('danhsach_sach')
+    def validate_list_book(self):
+        if len(self.danhsach_sach) == 0:
+            raise ValidationError('Vui lòng chọn ít nhất 1 sách trong phiếu mượn!!!')
+
+    @api.constrains('ngay_muon', 'ngay_tra')
+    def validate_ngay_tra(self):
+        if self.ngay_tra <= self.ngay_muon:
+            raise ValidationError('Ngày trả sách phải sau ngày mượn sách')
+
     def chap_nhan(self):
         self.trang_thai = '1'
 
     def tu_choi(self):
         self.trang_thai = '3'
+
+    def da_tra(self):
+        self.trang_thai = '4'
 
 
 

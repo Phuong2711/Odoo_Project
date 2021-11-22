@@ -34,6 +34,8 @@
                             <group>
                                 <field name="anh" widget="image"/>
                             </group>
+
+
                         </group>
                     </sheet>
                 </form>
