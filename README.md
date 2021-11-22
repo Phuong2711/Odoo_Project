@@ -11,7 +11,7 @@
 ## Bước 3: Mở Pycharm, Tiến hành config Odoo with Pycharm
       Hướng dẫn config Odoo with Pycharm: https://www.youtube.com/watch?v=p7SJW36lqVE
       
-## Bước 4: Chạy Pycharm, vào link : http://localhost:8069/
+## Bước 4: Chạy Pycharm, sau đó vào link : http://localhost:8069/
 
 ## Bước 5: Tiến hành cài đặt Module QuanLyThuVien
 
