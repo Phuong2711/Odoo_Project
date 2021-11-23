@@ -11,9 +11,9 @@ class PhieuMuon(models.Model):
 
     ma_phieu_muon = fields.Char(string='Mã phiếu mượn', copy=False,
                                 default= lambda self: _('Tạo phiếu mượn'))
-    ten_kh = fields.Char(string='Tên khách hàng:', require=True)
+    ten_kh = fields.Char(string='Tên khách hàng:')
     sdt = fields.Char(string='Số điện thoại:')
-    dia_chi = fields.Text(string='Địa chỉ:', require=True)
+    dia_chi = fields.Text(string='Địa chỉ:')
     danhsach_sach = fields.Many2many(comodel_name='model.sach')
     ngay_muon = fields.Date(string='Ngày mượn sách:', default=datetime.datetime.today(), store=True)
     ngay_tra = fields.Date(string='Ngày trả sách:')
@@ -32,15 +32,6 @@ class PhieuMuon(models.Model):
             vals['ma_phieu_muon'] = self.env['ir.sequence'].next_by_code('model.phieumuon.sequence') or 'Tạo phiếu mượn'
         result = super(PhieuMuon, self).create(vals)
         return result
-
-    def write(self, vals):
-        vals['ten_kh'] = vals['ten_kh'].title()
-        vals['dia_chi'] = vals['dia_chi'].title()
-        result = super(PhieuMuon, self).write(vals)
-        return result
-
-    def unlink(self):
-        return super(PhieuMuon, self).unlink()
 
     def check_trang_thai(self):
         today = fields.Date.today()
