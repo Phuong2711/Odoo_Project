@@ -9,6 +9,8 @@
             <field name="arch" type="xml">
                 <form string="">
                     <sheet>
+
+
                         <field name="anh_sach"  widget="image" class="oe_right oe_avatar"/>
 
                         <group>
